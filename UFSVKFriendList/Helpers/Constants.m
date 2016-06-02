@@ -10,3 +10,5 @@
 
 NSString* const UFSVK_APP_IDENTIFIER = @"5490691";
 NSString* const UFSVK_SHOW_LIST_SEGUE_ID = @"showList";
+NSString* const UFSVK_METHOD_URL = @"https://api.vk.com/method/";
+NSString* const FRIENDS_GET_KEY = @"friends.get";

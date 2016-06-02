@@ -11,6 +11,8 @@
 
 extern NSString* const UFSVK_APP_IDENTIFIER;
 extern NSString* const UFSVK_SHOW_LIST_SEGUE_ID;
+extern NSString* const UFSVK_METHOD_URL;
+extern NSString* const FRIENDS_GET_KEY;
 
 
 #endif /* Constants_h */

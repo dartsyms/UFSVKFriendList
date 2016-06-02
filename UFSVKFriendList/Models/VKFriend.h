@@ -9,5 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @interface VKFriend : NSObject
+//NS_ASSUME_NONNULL_BEGIN
 
+@property (strong, nonatomic) NSString *firstname;
+@property (strong, nonatomic) NSString *surname;
+@property (strong, nonatomic) NSURL *imgUrl;
+@property (strong, nonatomic) NSString *city;
+@property (strong, nonatomic) NSString *university;
+
+- (id)initWithData:(NSDictionary*)dict;
+
+//NS_ASSUME_NONNULL_END
 @end

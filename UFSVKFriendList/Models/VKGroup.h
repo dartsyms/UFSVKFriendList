@@ -10,4 +10,10 @@
 
 @interface VKGroup : NSObject
 
+@property (strong, nonatomic) NSString *grtitle;
+@property (strong, nonatomic) NSString *grdesc;
+@property (strong, nonatomic) NSURL *grImgUrl;
+
+- (id)initWithData:(NSDictionary*)dict;
+
 @end

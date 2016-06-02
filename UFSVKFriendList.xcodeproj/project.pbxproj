@@ -20,6 +20,7 @@
 		19B035911D00834500E5DDF1 /* VKFriendListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035901D00834500E5DDF1 /* VKFriendListTVC.m */; };
 		19B035941D00855400E5DDF1 /* VKFriendDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035931D00855400E5DDF1 /* VKFriendDTVC.m */; };
 		19B035981D00944200E5DDF1 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035971D00944200E5DDF1 /* Constants.m */; };
+		19B0359E1D00D29200E5DDF1 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0359D1D00D29200E5DDF1 /* DataManager.m */; };
 		B3298CE070F21CA0B181F26A /* libPods-UFSVKFriendList.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC78724F3C865C2FE870F3C /* libPods-UFSVKFriendList.a */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,8 @@
 		19B035931D00855400E5DDF1 /* VKFriendDTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKFriendDTVC.m; path = Controllers/VKFriendDTVC.m; sourceTree = "<group>"; };
 		19B035971D00944200E5DDF1 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = Helpers/Constants.m; sourceTree = "<group>"; };
 		19B035991D00947400E5DDF1 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Helpers/Constants.h; sourceTree = "<group>"; };
+		19B0359C1D00D29200E5DDF1 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = DataSource/DataManager.h; sourceTree = "<group>"; };
+		19B0359D1D00D29200E5DDF1 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = DataSource/DataManager.m; sourceTree = "<group>"; };
 		37A56A3BAC614067E2560F5F /* Pods-UFSVKFriendList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UFSVKFriendList.release.xcconfig"; path = "Pods/Target Support Files/Pods-UFSVKFriendList/Pods-UFSVKFriendList.release.xcconfig"; sourceTree = "<group>"; };
 		E707FC5CA7A440042235FBFE /* Pods-UFSVKFriendList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UFSVKFriendList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UFSVKFriendList/Pods-UFSVKFriendList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +89,7 @@
 		19B035681D005BED00E5DDF1 /* UFSVKFriendList */ = {
 			isa = PBXGroup;
 			children = (
+				19B0359A1D00D1DD00E5DDF1 /* DataSource */,
 				19B035951D008B5500E5DDF1 /* Helpers */,
 				19B035821D007E2F00E5DDF1 /* Models */,
 				19B035811D007AF400E5DDF1 /* Controllers */,
@@ -151,6 +155,15 @@
 				19B035991D00947400E5DDF1 /* Constants.h */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		19B0359A1D00D1DD00E5DDF1 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				19B0359C1D00D29200E5DDF1 /* DataManager.h */,
+				19B0359D1D00D29200E5DDF1 /* DataManager.m */,
+			);
+			name = DataSource;
 			sourceTree = "<group>";
 		};
 		2E4CA8F455D88DDE4E49CCE1 /* Frameworks */ = {
@@ -300,6 +313,7 @@
 				19B0358B1D00801D00E5DDF1 /* VKFriendTableViewCell.m in Sources */,
 				19B035851D007F8A00E5DDF1 /* VKFriend.m in Sources */,
 				19B0356B1D005BEF00E5DDF1 /* main.m in Sources */,
+				19B0359E1D00D29200E5DDF1 /* DataManager.m in Sources */,
 				19B035881D007FB400E5DDF1 /* VKGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

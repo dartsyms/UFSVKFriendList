@@ -10,4 +10,20 @@
 
 @implementation VKFriend
 
+- (id)initWithData:(NSDictionary *)dict {
+    
+    self = [super init];
+    if (self) {
+        self.firstname = [dict objectForKey:@"first_name"];
+        self.surname = [dict objectForKey:@"last_name"];
+        NSString *urlString = [dict objectForKey:@"photo"]; // placeholder, TODO: choose real key
+        if (urlString) {
+            self.imgUrl = [NSURL URLWithString:urlString];
+        }
+        self.city = [dict objectForKey:@"city"];
+        self.university = [dict objectForKey:@"university"];
+    }
+    return self;
+}
+
 @end
