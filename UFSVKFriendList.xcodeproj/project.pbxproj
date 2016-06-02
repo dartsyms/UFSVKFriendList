@@ -1,0 +1,451 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		19B0356B1D005BEF00E5DDF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0356A1D005BEF00E5DDF1 /* main.m */; };
+		19B0356E1D005BEF00E5DDF1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0356D1D005BEF00E5DDF1 /* AppDelegate.m */; };
+		19B035711D005BEF00E5DDF1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035701D005BEF00E5DDF1 /* MainViewController.m */; };
+		19B035741D005BF000E5DDF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B035721D005BF000E5DDF1 /* Main.storyboard */; };
+		19B035761D005BF000E5DDF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B035751D005BF000E5DDF1 /* Assets.xcassets */; };
+		19B035791D005BF000E5DDF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B035771D005BF000E5DDF1 /* LaunchScreen.storyboard */; };
+		19B035851D007F8A00E5DDF1 /* VKFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035841D007F8A00E5DDF1 /* VKFriend.m */; };
+		19B035881D007FB400E5DDF1 /* VKGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035871D007FB400E5DDF1 /* VKGroup.m */; };
+		19B0358B1D00801D00E5DDF1 /* VKFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0358A1D00801D00E5DDF1 /* VKFriendTableViewCell.m */; };
+		19B0358E1D00805F00E5DDF1 /* VKFriendDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0358D1D00805F00E5DDF1 /* VKFriendDetailTableViewCell.m */; };
+		19B035911D00834500E5DDF1 /* VKFriendListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035901D00834500E5DDF1 /* VKFriendListTVC.m */; };
+		19B035941D00855400E5DDF1 /* VKFriendDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035931D00855400E5DDF1 /* VKFriendDTVC.m */; };
+		B3298CE070F21CA0B181F26A /* libPods-UFSVKFriendList.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC78724F3C865C2FE870F3C /* libPods-UFSVKFriendList.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0CC78724F3C865C2FE870F3C /* libPods-UFSVKFriendList.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UFSVKFriendList.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		19B035661D005BEC00E5DDF1 /* UFSVKFriendList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UFSVKFriendList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		19B0356A1D005BEF00E5DDF1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		19B0356C1D005BEF00E5DDF1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		19B0356D1D005BEF00E5DDF1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		19B0356F1D005BEF00E5DDF1 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Controllers/MainViewController.h; sourceTree = "<group>"; };
+		19B035701D005BEF00E5DDF1 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Controllers/MainViewController.m; sourceTree = "<group>"; };
+		19B035731D005BF000E5DDF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		19B035751D005BF000E5DDF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		19B035781D005BF000E5DDF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		19B0357A1D005BF000E5DDF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19B035831D007F8A00E5DDF1 /* VKFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKFriend.h; path = Models/VKFriend.h; sourceTree = "<group>"; };
+		19B035841D007F8A00E5DDF1 /* VKFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKFriend.m; path = Models/VKFriend.m; sourceTree = "<group>"; };
+		19B035861D007FB400E5DDF1 /* VKGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKGroup.h; path = Models/VKGroup.h; sourceTree = "<group>"; };
+		19B035871D007FB400E5DDF1 /* VKGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKGroup.m; path = Models/VKGroup.m; sourceTree = "<group>"; };
+		19B035891D00801D00E5DDF1 /* VKFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKFriendTableViewCell.h; path = Views/VKFriendTableViewCell.h; sourceTree = "<group>"; };
+		19B0358A1D00801D00E5DDF1 /* VKFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKFriendTableViewCell.m; path = Views/VKFriendTableViewCell.m; sourceTree = "<group>"; };
+		19B0358C1D00805F00E5DDF1 /* VKFriendDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKFriendDetailTableViewCell.h; path = Views/VKFriendDetailTableViewCell.h; sourceTree = "<group>"; };
+		19B0358D1D00805F00E5DDF1 /* VKFriendDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKFriendDetailTableViewCell.m; path = Views/VKFriendDetailTableViewCell.m; sourceTree = "<group>"; };
+		19B0358F1D00834500E5DDF1 /* VKFriendListTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKFriendListTVC.h; path = Controllers/VKFriendListTVC.h; sourceTree = "<group>"; };
+		19B035901D00834500E5DDF1 /* VKFriendListTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKFriendListTVC.m; path = Controllers/VKFriendListTVC.m; sourceTree = "<group>"; };
+		19B035921D00855400E5DDF1 /* VKFriendDTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKFriendDTVC.h; path = Controllers/VKFriendDTVC.h; sourceTree = "<group>"; };
+		19B035931D00855400E5DDF1 /* VKFriendDTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKFriendDTVC.m; path = Controllers/VKFriendDTVC.m; sourceTree = "<group>"; };
+		37A56A3BAC614067E2560F5F /* Pods-UFSVKFriendList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UFSVKFriendList.release.xcconfig"; path = "Pods/Target Support Files/Pods-UFSVKFriendList/Pods-UFSVKFriendList.release.xcconfig"; sourceTree = "<group>"; };
+		E707FC5CA7A440042235FBFE /* Pods-UFSVKFriendList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UFSVKFriendList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UFSVKFriendList/Pods-UFSVKFriendList.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		19B035631D005BEC00E5DDF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3298CE070F21CA0B181F26A /* libPods-UFSVKFriendList.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19B0355D1D005BEB00E5DDF1 = {
+			isa = PBXGroup;
+			children = (
+				19B035681D005BED00E5DDF1 /* UFSVKFriendList */,
+				19B035671D005BEC00E5DDF1 /* Products */,
+				C7E2B75A5581DAE6B92C3D0A /* Pods */,
+				2E4CA8F455D88DDE4E49CCE1 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		19B035671D005BEC00E5DDF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				19B035661D005BEC00E5DDF1 /* UFSVKFriendList.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		19B035681D005BED00E5DDF1 /* UFSVKFriendList */ = {
+			isa = PBXGroup;
+			children = (
+				19B035821D007E2F00E5DDF1 /* Models */,
+				19B035811D007AF400E5DDF1 /* Controllers */,
+				19B035801D007AED00E5DDF1 /* Views */,
+				19B035721D005BF000E5DDF1 /* Main.storyboard */,
+				19B035751D005BF000E5DDF1 /* Assets.xcassets */,
+				19B035771D005BF000E5DDF1 /* LaunchScreen.storyboard */,
+				19B035691D005BEE00E5DDF1 /* Supporting Files */,
+			);
+			path = UFSVKFriendList;
+			sourceTree = "<group>";
+		};
+		19B035691D005BEE00E5DDF1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				19B0357A1D005BF000E5DDF1 /* Info.plist */,
+				19B0356C1D005BEF00E5DDF1 /* AppDelegate.h */,
+				19B0356D1D005BEF00E5DDF1 /* AppDelegate.m */,
+				19B0356A1D005BEF00E5DDF1 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		19B035801D007AED00E5DDF1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				19B035891D00801D00E5DDF1 /* VKFriendTableViewCell.h */,
+				19B0358A1D00801D00E5DDF1 /* VKFriendTableViewCell.m */,
+				19B0358C1D00805F00E5DDF1 /* VKFriendDetailTableViewCell.h */,
+				19B0358D1D00805F00E5DDF1 /* VKFriendDetailTableViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		19B035811D007AF400E5DDF1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				19B0356F1D005BEF00E5DDF1 /* MainViewController.h */,
+				19B035701D005BEF00E5DDF1 /* MainViewController.m */,
+				19B0358F1D00834500E5DDF1 /* VKFriendListTVC.h */,
+				19B035901D00834500E5DDF1 /* VKFriendListTVC.m */,
+				19B035921D00855400E5DDF1 /* VKFriendDTVC.h */,
+				19B035931D00855400E5DDF1 /* VKFriendDTVC.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		19B035821D007E2F00E5DDF1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				19B035831D007F8A00E5DDF1 /* VKFriend.h */,
+				19B035841D007F8A00E5DDF1 /* VKFriend.m */,
+				19B035861D007FB400E5DDF1 /* VKGroup.h */,
+				19B035871D007FB400E5DDF1 /* VKGroup.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		2E4CA8F455D88DDE4E49CCE1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CC78724F3C865C2FE870F3C /* libPods-UFSVKFriendList.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C7E2B75A5581DAE6B92C3D0A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E707FC5CA7A440042235FBFE /* Pods-UFSVKFriendList.debug.xcconfig */,
+				37A56A3BAC614067E2560F5F /* Pods-UFSVKFriendList.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		19B035651D005BEC00E5DDF1 /* UFSVKFriendList */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 19B0357D1D005BF000E5DDF1 /* Build configuration list for PBXNativeTarget "UFSVKFriendList" */;
+			buildPhases = (
+				0266D7C7BAADE6A736D31433 /* Check Pods Manifest.lock */,
+				19B035621D005BEC00E5DDF1 /* Sources */,
+				19B035631D005BEC00E5DDF1 /* Frameworks */,
+				19B035641D005BEC00E5DDF1 /* Resources */,
+				EB3BBDBB1325A28F8432F34A /* Embed Pods Frameworks */,
+				78F9FC14A284EC276510F382 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UFSVKFriendList;
+			productName = UFSVKFriendList;
+			productReference = 19B035661D005BEC00E5DDF1 /* UFSVKFriendList.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		19B0355E1D005BEB00E5DDF1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "KOT LLC";
+				TargetAttributes = {
+					19B035651D005BEC00E5DDF1 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 19B035611D005BEB00E5DDF1 /* Build configuration list for PBXProject "UFSVKFriendList" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 19B0355D1D005BEB00E5DDF1;
+			productRefGroup = 19B035671D005BEC00E5DDF1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				19B035651D005BEC00E5DDF1 /* UFSVKFriendList */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		19B035641D005BEC00E5DDF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19B035791D005BF000E5DDF1 /* LaunchScreen.storyboard in Resources */,
+				19B035761D005BF000E5DDF1 /* Assets.xcassets in Resources */,
+				19B035741D005BF000E5DDF1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0266D7C7BAADE6A736D31433 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		78F9FC14A284EC276510F382 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UFSVKFriendList/Pods-UFSVKFriendList-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB3BBDBB1325A28F8432F34A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UFSVKFriendList/Pods-UFSVKFriendList-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		19B035621D005BEC00E5DDF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19B0358E1D00805F00E5DDF1 /* VKFriendDetailTableViewCell.m in Sources */,
+				19B035711D005BEF00E5DDF1 /* MainViewController.m in Sources */,
+				19B035941D00855400E5DDF1 /* VKFriendDTVC.m in Sources */,
+				19B0356E1D005BEF00E5DDF1 /* AppDelegate.m in Sources */,
+				19B035911D00834500E5DDF1 /* VKFriendListTVC.m in Sources */,
+				19B0358B1D00801D00E5DDF1 /* VKFriendTableViewCell.m in Sources */,
+				19B035851D007F8A00E5DDF1 /* VKFriend.m in Sources */,
+				19B0356B1D005BEF00E5DDF1 /* main.m in Sources */,
+				19B035881D007FB400E5DDF1 /* VKGroup.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		19B035721D005BF000E5DDF1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				19B035731D005BF000E5DDF1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		19B035771D005BF000E5DDF1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				19B035781D005BF000E5DDF1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		19B0357B1D005BF000E5DDF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		19B0357C1D005BF000E5DDF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		19B0357E1D005BF000E5DDF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E707FC5CA7A440042235FBFE /* Pods-UFSVKFriendList.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = UFSVKFriendList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.kot-it.UFSVKFriendList";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		19B0357F1D005BF000E5DDF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37A56A3BAC614067E2560F5F /* Pods-UFSVKFriendList.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = UFSVKFriendList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.kot-it.UFSVKFriendList";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		19B035611D005BEB00E5DDF1 /* Build configuration list for PBXProject "UFSVKFriendList" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19B0357B1D005BF000E5DDF1 /* Debug */,
+				19B0357C1D005BF000E5DDF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		19B0357D1D005BF000E5DDF1 /* Build configuration list for PBXNativeTarget "UFSVKFriendList" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19B0357E1D005BF000E5DDF1 /* Debug */,
+				19B0357F1D005BF000E5DDF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 19B0355E1D005BEB00E5DDF1 /* Project object */;
+}
