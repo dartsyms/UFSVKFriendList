@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VKFriend.h"
 
 @interface VKFriendDTVC : UITableViewController
+
+@property VKFriend *friend;
 
 @end

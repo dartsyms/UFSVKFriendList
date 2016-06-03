@@ -12,8 +12,12 @@
 
 + (DataManager *)sharedInstance;
 
-- (void)getFriendsForId:(long)userID offset:(NSInteger)offset count:(NSInteger)count
+- (void)getFriendsForUserId:(long)userID offset:(NSInteger)offset count:(NSInteger)count
                success:(void(^)(NSArray *friends))success
                failure:(void(^)(NSError *error, NSInteger statusCode)) failure;
+
+- (void)getGroupsForUserId:(long)userID offset:(NSInteger)offset count:(NSInteger)count
+                    success:(void(^)(NSArray *groups))success
+                    failure:(void(^)(NSError *error, NSInteger statusCode)) failure;
 
 @end

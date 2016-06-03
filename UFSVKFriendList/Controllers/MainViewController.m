@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "Constants.h"
 #import "VKSdk.h"
+#import "VKFriendListTVC.h"
 
 @interface MainViewController () <VKSdkDelegate, VKSdkUIDelegate>
 
@@ -79,6 +80,14 @@
 - (void)updateUISetHiddenloginButton:(BOOL)buttonState andMessage:(NSString *)messsage {
     self.loginButton.hidden = buttonState;
     self.loginLabel.text = messsage;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:UFSVK_SHOW_LIST_SEGUE_ID]) {
+        VKFriendListTVC *ftvc = [segue destinationViewController];
+        NSInteger currentUserID = [[[VKSdk accessToken] userId] integerValue];
+        ftvc.userID = currentUserID;
+    }
 }
 
 @end

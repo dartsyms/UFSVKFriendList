@@ -7,92 +7,133 @@
 //
 
 #import "VKFriendListTVC.h"
+#import "Constants.h"
+#import "DataManager.h"
+#import "VKFriend.h"
+#import "VKFriendTableViewCell.h"
+#import "VKFriendDTVC.h"
+#import "VKSdk.h"
+#import "UIImageView+AFNetworking.h"
 
-@interface VKFriendListTVC ()
+@interface VKFriendListTVC () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIScrollViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
+
 
 @end
 
-@implementation VKFriendListTVC
+@implementation VKFriendListTVC {
+    UIRefreshControl *refresh;
+    NSMutableArray *friendsArray;
+    NSArray *searchResults;
+}
 
+@dynamic tableView;
+
+static NSInteger friendsPerRequest = 30;
+
+#pragma mark - Lifecycle and UI Helper Functions
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self->friendsArray = [NSMutableArray array];
+    [self setupUI];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setupUI {
+    refresh = [[UIRefreshControl alloc] init];
+    [refresh addTarget:self action:@selector(pullTo:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refresh];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 100;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [refresh beginRefreshing];
+    [self pullTo:refresh];
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+#pragma mark - Data Load
+- (void)loadDataFromServer {
+    [[DataManager sharedInstance] getFriendsForUserId:[[[VKSdk accessToken] userId] integerValue]
+               offset:self->friendsArray.count
+                count:friendsPerRequest
+                success:^(NSArray *friends) {
+                    [self->friendsArray addObjectsFromArray:friends];
+                    NSMutableArray *nextPart = [NSMutableArray array];
+                    for (int i = (int)[self->friendsArray count] - (int)[friends count]; i < [self->friendsArray count]; i++) {
+                        [nextPart addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                    }
+                    [self.tableView beginUpdates];
+                    [self.tableView insertRowsAtIndexPaths:nextPart withRowAnimation:UITableViewRowAnimationTop];
+                    [self.tableView endUpdates];
+                }
+                failure:^(NSError *error, NSInteger statusCode) {
+                    NSLog(@"error = %@, code = %ld", [error localizedDescription], (long)statusCode);
+                }];
+}
+
+- (void)pullTo:(UIRefreshControl *)_refreshControl {
+    self.searchBar.text = @"";
+    [self loadDataFromServer];
+}
+
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return friendsArray.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
+    VKFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FRIEND_CELL_ID forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[VKFriendTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FRIEND_CELL_ID];
+    }
+    [cell configureCellFor:friendsArray[indexPath.row]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // not used
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+//TODO: Implement search by name, city, etc
+
+#pragma mark - Keyboard Notification Observers
+-(void)keyboardWillShow:(NSNotification *)notification {
+    CGSize keyboardSize = [[notification userInfo][UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    self.tableViewBottomConstraint.constant = keyboardSize.height;
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+-(void)keyboardWillHide {
+    self.tableViewBottomConstraint.constant = 0;
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:UFSVK_SHOW_DETAILS_SEGUE_ID]) {
+        VKFriendDTVC *dtvc = [segue destinationViewController];
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        dtvc.friend = [friendsArray objectAtIndex:indexPath.row];
+    }
 }
-*/
 
 @end

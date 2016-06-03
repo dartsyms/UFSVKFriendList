@@ -10,6 +10,7 @@
 #import "AFNetworking.h"
 #import "Constants.h"
 #import "VKFriend.h"
+#import "VKGroup.h"
 
 @interface DataManager ()
 
@@ -36,17 +37,17 @@
     return self;
 }
 
-- (void)getFriendsForId:(long)userID offset:(NSInteger)offset count:(NSInteger)count
+- (void)getFriendsForUserId:(NSInteger)userID offset:(NSInteger)offset count:(NSInteger)count
                 success:(void (^)(NSArray *))success
                 failure:(void (^)(NSError *, NSInteger))failure {
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @(userID),    @"user_id",
-                            @"name",      @"order",
-                            @(count),     @"count",
-                            @(offset),    @"offset",
-                            @"photo_50",  @"fields",
-                            @"name_case", @"nom",
-                            nil];
+                                            @(userID),    @"user_id",
+                                            @"name",      @"order",
+                                            @(count),     @"count",
+                                            @(offset),    @"offset",
+@"uid,first_name,last_name,photo_50,city,universities",   @"fields",
+                                            @"name_case", @"nom",
+                                            nil];
     
     NSString *urlString = [UFSVK_METHOD_URL stringByAppendingString:FRIENDS_GET_KEY];
     
@@ -61,6 +62,44 @@
                     for (NSDictionary *dict in dictArr) {
                         VKFriend *friend = [[VKFriend alloc] initWithData:dict];
                         [dataArr addObject:friend];
+                    }
+                    success(dataArr);
+                }
+            } else {
+                NSLog(@"Error: %@, %@, %@", error, response, responseObject);
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                failure(error, httpResponse.statusCode);
+            }
+        }];
+    [downloadTask resume];
+    
+}
+
+- (void)getGroupsForUserId:(NSInteger)userID offset:(NSInteger)offset count:(NSInteger)count
+                    success:(void (^)(NSArray *))success
+                    failure:(void (^)(NSError *, NSInteger))failure {
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @(userID),    @"user_id",
+                            @"name",      @"order",
+                            @(count),     @"count",
+                            @(offset),    @"offset",
+         @"name,photo_10,description",    @"fields",
+                            @"name_case", @"nom",
+                            nil];
+    
+    NSString *urlString = [UFSVK_METHOD_URL stringByAppendingString:FRIENDS_GET_KEY];
+    
+    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:urlString parameters:params error:nil];
+    NSURLSessionDataTask *downloadTask = [self.sessionManager dataTaskWithRequest:request
+      completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+            if (!error) {
+                NSLog(@"Reply JSON: %@", responseObject);
+                if ([responseObject isKindOfClass:[NSArray class]]) {
+                    NSArray *dictArr = [responseObject objectForKey:@"response"];
+                    NSMutableArray *dataArr = [NSMutableArray array];
+                    for (NSDictionary *dict in dictArr) {
+                        VKGroup *group = [[VKGroup alloc] initWithData:dict];
+                        [dataArr addObject:group];
                     }
                     success(dataArr);
                 }

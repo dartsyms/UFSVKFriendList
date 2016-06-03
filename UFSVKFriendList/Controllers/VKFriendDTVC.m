@@ -7,92 +7,90 @@
 //
 
 #import "VKFriendDTVC.h"
+#import "Constants.h"
+#import "DataManager.h"
+#import "VKFriendDetailTableViewCell.h"
+#import "VKFriendDTVC.h"
+#import "VKSdk.h"
+#import "UIImageView+AFNetworking.h"
 
-@interface VKFriendDTVC ()
+@interface VKFriendDTVC () <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
-@implementation VKFriendDTVC
+@implementation VKFriendDTVC {
+    UIRefreshControl *refresh;
+    NSMutableArray *groupsArray;
+}
 
+@dynamic tableView;
+
+static NSInteger groupsPerRequest = 10;
+
+#pragma mark - Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self->groupsArray = [NSMutableArray array];
+    [self setupUI];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setupUI {
+    refresh = [[UIRefreshControl alloc] init];
+    [refresh addTarget:self action:@selector(pullTo:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refresh];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 100;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [refresh beginRefreshing];
+    [self pullTo:refresh];
 }
+
+#pragma mark - Data Load
+- (void)loadDataFromServer {
+    [[DataManager sharedInstance] getGroupsForUserId:[[[VKSdk accessToken] userId] integerValue]
+                                               offset:self->groupsArray.count
+                                                count:groupsPerRequest
+                                              success:^(NSArray *groups) {
+                                                  [self->groupsArray addObjectsFromArray:groups];
+                                                  NSMutableArray *nextPart = [NSMutableArray array];
+                                                  for (int i = (int)[self->groupsArray count] - (int)[groups count]; i < [self->groupsArray count]; i++) {
+                                                      [nextPart addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                                                  }
+                                                  [self.tableView beginUpdates];
+                                                  [self.tableView insertRowsAtIndexPaths:nextPart withRowAnimation:UITableViewRowAnimationTop];
+                                                  [self.tableView endUpdates];
+                                              }
+                                              failure:^(NSError *error, NSInteger statusCode) {
+                                                  NSLog(@"error = %@, code = %ld", [error localizedDescription], (long)statusCode);
+                                              }];
+}
+
+- (void)pullTo:(UIRefreshControl *)_refreshControl {
+    [self loadDataFromServer];
+}
+
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return groupsArray.count;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
+    VKFriendDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:DETAILS_CELL_ID forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[VKFriendDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DETAILS_CELL_ID];
+    }
+    [cell configureCellFor:groupsArray[indexPath.row]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

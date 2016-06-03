@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *universityIn;
 @property (weak, nonatomic) IBOutlet UIImageView *userPhoto;
 
+@property NSURLRequest *request;
+
 - (void)configureCellFor:(VKFriend *)friend;
 
 @end

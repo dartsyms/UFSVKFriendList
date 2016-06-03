@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *desc;
 @property (weak, nonatomic) IBOutlet UIImageView *groupPhoto;
 
+@property NSURLRequest *request;
+
 - (void)configureCellFor:(VKGroup *)group;
 
 @end

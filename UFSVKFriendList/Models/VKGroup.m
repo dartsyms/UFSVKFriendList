@@ -2,7 +2,7 @@
 //  VKGroup.m
 //  UFSVKFriendList
 //
-//  Created by sanchez on 02.06.16.
+//  Created by noname on 02.06.16.
 //  Copyright © 2016 KOT LLC. All rights reserved.
 //
 
@@ -15,7 +15,7 @@
     if (self) {
         self.grtitle = [dict objectForKey:@"name"];
         self.grdesc = [dict objectForKey:@"description"];
-        NSString *urlString = [dict objectForKey:@"group_photo"]; // placeholder, TODO: choose real key
+        NSString *urlString = [dict objectForKey:@"photo_100"];
         if (urlString) {
             self.grImgUrl = [NSURL URLWithString:urlString];
         }

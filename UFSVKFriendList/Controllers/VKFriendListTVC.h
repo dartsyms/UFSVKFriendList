@@ -10,4 +10,6 @@
 
 @interface VKFriendListTVC : UITableViewController
 
+@property (readwrite) NSInteger userID;
+
 @end

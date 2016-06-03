@@ -7,6 +7,7 @@
 //
 
 #import "VKFriendDetailTableViewCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation VKFriendDetailTableViewCell
 
@@ -19,7 +20,20 @@
 }
 
 - (void)configureCellFor:(VKGroup *)group {
+    self.title.text = group.grtitle;
+    self.desc.text = group.grdesc;
     
+    self.request = [NSURLRequest requestWithURL:group.grImgUrl];
+    __weak VKFriendDetailTableViewCell *weakSelf = self;
+    self.imageView.image = nil;
+    [self.imageView setImageWithURLRequest:self.request placeholderImage:nil
+                                   success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+                                       weakSelf.imageView.image = image;
+                                       [weakSelf layoutSubviews];
+                                   }
+                                   failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+                                       //
+                                   }];
 }
 
 @end
