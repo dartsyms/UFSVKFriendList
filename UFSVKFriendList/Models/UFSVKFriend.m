@@ -1,21 +1,21 @@
 //
-//  VKFriend.m
+//  UFSVKFriend.m
 //  UFSVKFriendList
 //
 //  Created by noname on 02.06.16.
 //  Copyright © 2016 KOT LLC. All rights reserved.
 //
 
-#import "VKFriend.h"
+#import "UFSVKFriend.h"
 
-@implementation VKFriend
+@implementation UFSVKFriend
 
 - (id)initWithData:(NSDictionary *)dict {
     
     self = [super init];
     if (self) {
         self.firstname = [dict objectForKey:@"first_name"];
-        self.userId = [dict objectForKey:@"user_id"];
+        self.userID = [dict objectForKey:@"user_id"];
         self.surname = [dict objectForKey:@"last_name"];
         NSString *urlString = [dict objectForKey:@"photo_50"];
         if (urlString) {

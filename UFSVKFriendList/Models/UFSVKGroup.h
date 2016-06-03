@@ -1,5 +1,5 @@
 //
-//  VKGroup.h
+//  UFSVKGroup.h
 //  UFSVKFriendList
 //
 //  Created by noname on 02.06.16.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VKGroup : NSObject
+@interface UFSVKGroup : NSObject
 
 @property (strong, nonatomic) NSString *grtitle;
 @property (strong, nonatomic) NSString *grdesc;

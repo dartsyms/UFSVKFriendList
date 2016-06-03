@@ -19,7 +19,7 @@
     [super setSelected:selected animated:animated];
 }
 
-- (void)configureCellFor:(VKGroup *)group {
+- (void)configureCellFor:(UFSVKGroup *)group {
     self.title.text = group.grtitle;
     self.desc.text = group.grdesc;
     

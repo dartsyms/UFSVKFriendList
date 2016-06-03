@@ -7,7 +7,6 @@
 //
 
 #import "VKFriendTableViewCell.h"
-#import "VKFriend.h"
 #import "UIImageView+AFNetworking.h"
 
 @implementation VKFriendTableViewCell
@@ -21,7 +20,7 @@
 }
 
 
--(void)configureCellFor:(VKFriend *)friend {
+-(void)configureCellFor:(UFSVKFriend *)friend {
     self.friendName.text = [NSString stringWithFormat:@"%@ %@", friend.firstname, friend.surname];
     self.cityFrom.text = friend.city;
     

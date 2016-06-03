@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VKFriend.h"
+#import "UFSVKFriend.h"
 
-@interface VKFriendDTVC : UITableViewController
+@interface VKFriendDTVC : UITableViewController <UISplitViewControllerDelegate>
 
-@property VKFriend *friend;
+@property UFSVKFriend *friend;
 
 @end

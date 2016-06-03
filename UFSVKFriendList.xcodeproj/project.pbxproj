@@ -13,14 +13,14 @@
 		19B035741D005BF000E5DDF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B035721D005BF000E5DDF1 /* Main.storyboard */; };
 		19B035761D005BF000E5DDF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B035751D005BF000E5DDF1 /* Assets.xcassets */; };
 		19B035791D005BF000E5DDF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B035771D005BF000E5DDF1 /* LaunchScreen.storyboard */; };
-		19B035851D007F8A00E5DDF1 /* VKFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035841D007F8A00E5DDF1 /* VKFriend.m */; };
-		19B035881D007FB400E5DDF1 /* VKGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035871D007FB400E5DDF1 /* VKGroup.m */; };
+		19B035851D007F8A00E5DDF1 /* UFSVKFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035841D007F8A00E5DDF1 /* UFSVKFriend.m */; };
+		19B035881D007FB400E5DDF1 /* UFSVKGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035871D007FB400E5DDF1 /* UFSVKGroup.m */; };
 		19B0358B1D00801D00E5DDF1 /* VKFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0358A1D00801D00E5DDF1 /* VKFriendTableViewCell.m */; };
 		19B0358E1D00805F00E5DDF1 /* VKFriendDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0358D1D00805F00E5DDF1 /* VKFriendDetailTableViewCell.m */; };
 		19B035911D00834500E5DDF1 /* VKFriendListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035901D00834500E5DDF1 /* VKFriendListTVC.m */; };
 		19B035941D00855400E5DDF1 /* VKFriendDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035931D00855400E5DDF1 /* VKFriendDTVC.m */; };
-		19B035981D00944200E5DDF1 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B035971D00944200E5DDF1 /* Constants.m */; };
 		19B0359E1D00D29200E5DDF1 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0359D1D00D29200E5DDF1 /* DataManager.m */; };
+		19E8492E1D01F41400579A7C /* UFSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E8492D1D01F41400579A7C /* UFSRequest.m */; };
 		B3298CE070F21CA0B181F26A /* libPods-UFSVKFriendList.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC78724F3C865C2FE870F3C /* libPods-UFSVKFriendList.a */; };
 /* End PBXBuildFile section */
 
@@ -36,10 +36,10 @@
 		19B035751D005BF000E5DDF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19B035781D005BF000E5DDF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19B0357A1D005BF000E5DDF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		19B035831D007F8A00E5DDF1 /* VKFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKFriend.h; path = Models/VKFriend.h; sourceTree = "<group>"; };
-		19B035841D007F8A00E5DDF1 /* VKFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKFriend.m; path = Models/VKFriend.m; sourceTree = "<group>"; };
-		19B035861D007FB400E5DDF1 /* VKGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKGroup.h; path = Models/VKGroup.h; sourceTree = "<group>"; };
-		19B035871D007FB400E5DDF1 /* VKGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKGroup.m; path = Models/VKGroup.m; sourceTree = "<group>"; };
+		19B035831D007F8A00E5DDF1 /* UFSVKFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UFSVKFriend.h; path = Models/UFSVKFriend.h; sourceTree = "<group>"; };
+		19B035841D007F8A00E5DDF1 /* UFSVKFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UFSVKFriend.m; path = Models/UFSVKFriend.m; sourceTree = "<group>"; };
+		19B035861D007FB400E5DDF1 /* UFSVKGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UFSVKGroup.h; path = Models/UFSVKGroup.h; sourceTree = "<group>"; };
+		19B035871D007FB400E5DDF1 /* UFSVKGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UFSVKGroup.m; path = Models/UFSVKGroup.m; sourceTree = "<group>"; };
 		19B035891D00801D00E5DDF1 /* VKFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKFriendTableViewCell.h; path = Views/VKFriendTableViewCell.h; sourceTree = "<group>"; };
 		19B0358A1D00801D00E5DDF1 /* VKFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKFriendTableViewCell.m; path = Views/VKFriendTableViewCell.m; sourceTree = "<group>"; };
 		19B0358C1D00805F00E5DDF1 /* VKFriendDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKFriendDetailTableViewCell.h; path = Views/VKFriendDetailTableViewCell.h; sourceTree = "<group>"; };
@@ -48,10 +48,10 @@
 		19B035901D00834500E5DDF1 /* VKFriendListTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKFriendListTVC.m; path = Controllers/VKFriendListTVC.m; sourceTree = "<group>"; };
 		19B035921D00855400E5DDF1 /* VKFriendDTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKFriendDTVC.h; path = Controllers/VKFriendDTVC.h; sourceTree = "<group>"; };
 		19B035931D00855400E5DDF1 /* VKFriendDTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKFriendDTVC.m; path = Controllers/VKFriendDTVC.m; sourceTree = "<group>"; };
-		19B035971D00944200E5DDF1 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = Helpers/Constants.m; sourceTree = "<group>"; };
-		19B035991D00947400E5DDF1 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Helpers/Constants.h; sourceTree = "<group>"; };
 		19B0359C1D00D29200E5DDF1 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = DataSource/DataManager.h; sourceTree = "<group>"; };
 		19B0359D1D00D29200E5DDF1 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = DataSource/DataManager.m; sourceTree = "<group>"; };
+		19E8492C1D01F41400579A7C /* UFSRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UFSRequest.h; path = Helpers/UFSRequest.h; sourceTree = "<group>"; };
+		19E8492D1D01F41400579A7C /* UFSRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UFSRequest.m; path = Helpers/UFSRequest.m; sourceTree = "<group>"; };
 		37A56A3BAC614067E2560F5F /* Pods-UFSVKFriendList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UFSVKFriendList.release.xcconfig"; path = "Pods/Target Support Files/Pods-UFSVKFriendList/Pods-UFSVKFriendList.release.xcconfig"; sourceTree = "<group>"; };
 		E707FC5CA7A440042235FBFE /* Pods-UFSVKFriendList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UFSVKFriendList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UFSVKFriendList/Pods-UFSVKFriendList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,10 +140,10 @@
 		19B035821D007E2F00E5DDF1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				19B035831D007F8A00E5DDF1 /* VKFriend.h */,
-				19B035841D007F8A00E5DDF1 /* VKFriend.m */,
-				19B035861D007FB400E5DDF1 /* VKGroup.h */,
-				19B035871D007FB400E5DDF1 /* VKGroup.m */,
+				19B035831D007F8A00E5DDF1 /* UFSVKFriend.h */,
+				19B035841D007F8A00E5DDF1 /* UFSVKFriend.m */,
+				19B035861D007FB400E5DDF1 /* UFSVKGroup.h */,
+				19B035871D007FB400E5DDF1 /* UFSVKGroup.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -151,8 +151,8 @@
 		19B035951D008B5500E5DDF1 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				19B035971D00944200E5DDF1 /* Constants.m */,
-				19B035991D00947400E5DDF1 /* Constants.h */,
+				19E8492C1D01F41400579A7C /* UFSRequest.h */,
+				19E8492D1D01F41400579A7C /* UFSRequest.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -309,12 +309,12 @@
 				19B035941D00855400E5DDF1 /* VKFriendDTVC.m in Sources */,
 				19B0356E1D005BEF00E5DDF1 /* AppDelegate.m in Sources */,
 				19B035911D00834500E5DDF1 /* VKFriendListTVC.m in Sources */,
-				19B035981D00944200E5DDF1 /* Constants.m in Sources */,
+				19E8492E1D01F41400579A7C /* UFSRequest.m in Sources */,
 				19B0358B1D00801D00E5DDF1 /* VKFriendTableViewCell.m in Sources */,
-				19B035851D007F8A00E5DDF1 /* VKFriend.m in Sources */,
+				19B035851D007F8A00E5DDF1 /* UFSVKFriend.m in Sources */,
 				19B0356B1D005BEF00E5DDF1 /* main.m in Sources */,
 				19B0359E1D00D29200E5DDF1 /* DataManager.m in Sources */,
-				19B035881D007FB400E5DDF1 /* VKGroup.m in Sources */,
+				19B035881D007FB400E5DDF1 /* UFSVKGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,7 +431,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = UFSVKFriendList/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.kot-it.UFSVKFriendList";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -445,7 +445,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = UFSVKFriendList/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.kot-it.UFSVKFriendList";
 				PRODUCT_NAME = "$(TARGET_NAME)";

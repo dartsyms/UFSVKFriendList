@@ -7,58 +7,69 @@
 //
 
 #import "MainViewController.h"
-#import "Constants.h"
 #import "VKSdk.h"
 #import "VKFriendListTVC.h"
+
+static NSString * const UFSVK_SHOW_LIST_SEGUE_ID = @"showList";
+static NSString * const TOKEN_KEY = @"app_access_token";
+static NSString * const UFSVK_APP_ID = @"5490691";
+static NSArray *SCOPE = nil;
 
 @interface MainViewController () <VKSdkDelegate, VKSdkUIDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *loginLabel;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
-@property (weak, nonatomic) IBOutlet UITextField *loginStatus;
 
 @end
 
 @implementation MainViewController
 
+
 #pragma mark - Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    VKSdk *instance = [VKSdk initializeWithAppId:UFSVK_APP_IDENTIFIER];
-    [instance registerDelegate:self];
-    [instance setUiDelegate:self];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self updateUISetHiddenloginButton:YES andMessage:@" "];
+    SCOPE = @[VK_PER_FRIENDS, VK_PER_GROUPS];
+    [[VKSdk initializeWithAppId:UFSVK_APP_ID] registerDelegate:self];
+    [[VKSdk instance] setUiDelegate:self];
     
-    [VKSdk wakeUpSession:@[] completeBlock:^(VKAuthorizationState state, NSError *error) {
-        if (state == VKAuthorizationAuthorized) {
-            [self performSegueWithIdentifier:UFSVK_SHOW_LIST_SEGUE_ID sender:self];
-        } else if (error) {
-            [self updateUISetHiddenloginButton:NO andMessage:@"Something nasty happend. Try again later"];
-        } else {
-            [self updateUISetHiddenloginButton:NO andMessage:@"Authorization needed. Click the button."];
-            
+    [VKSdk wakeUpSession:SCOPE completeBlock:^(VKAuthorizationState state, NSError *error) {
+        switch (state) {
+            case VKAuthorizationAuthorized: {
+                    NSLog(@"Token: %@", [VKSdk accessToken]);
+                    [self updateUISetHiddenloginButton:YES andMessage:@"Session exists."];
+                    [VKSdk wakeUpSession:SCOPE completeBlock:^(VKAuthorizationState state, NSError *error) {
+                        [self performSegueWithIdentifier:UFSVK_SHOW_LIST_SEGUE_ID sender:self];
+                    }]; }
+                break;
+            case VKAuthorizationInitialized:
+                [self updateUISetHiddenloginButton:NO andMessage:@"Proceed with login."];
+                [VKSdk authorize:SCOPE];
+                break;
+            default:
+                [self updateUISetHiddenloginButton:NO andMessage:@"Try again later"];
+                break;
         }
     }];
 }
 
-#pragma mark - User Actions
 
+#pragma mark - User Actions
 - (IBAction)tapToLogin:(UIButton*)sender {
     [self updateUISetHiddenloginButton:YES andMessage:@" "];
-    [VKSdk authorize:@[]];
+    [VKSdk authorize:SCOPE];
 }
 
 #pragma mark - VKSdkDelegate and VKSdkUIDelegate arbitrary methods
-
 - (void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result {
-    self.loginButton.hidden = NO;
-    self.loginLabel.text = @" ";
-    [self performSegueWithIdentifier:UFSVK_SHOW_LIST_SEGUE_ID sender:self];
+    if (result.token) {
+        NSLog(@"Received token %@: ", result.token);
+        [self performSegueWithIdentifier:UFSVK_SHOW_LIST_SEGUE_ID sender:self];
+    } else if (result.error) {
+        self.loginButton.hidden = NO;
+        self.loginLabel.text = @" ";
+    }
+    
 }
 
 - (void)vkSdkUserAuthorizationFailed {
@@ -75,19 +86,14 @@
     [vc presentIn:self];
 }
 
-#pragma mark - Helpers
+- (void)vkSdkAccessTokenUpdated:(VKAccessToken *)newToken oldToken:(VKAccessToken *)oldToken {
+    
+}
 
+#pragma mark - Helpers
 - (void)updateUISetHiddenloginButton:(BOOL)buttonState andMessage:(NSString *)messsage {
     self.loginButton.hidden = buttonState;
     self.loginLabel.text = messsage;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:UFSVK_SHOW_LIST_SEGUE_ID]) {
-        VKFriendListTVC *ftvc = [segue destinationViewController];
-        NSInteger currentUserID = [[[VKSdk accessToken] userId] integerValue];
-        ftvc.userID = currentUserID;
-    }
 }
 
 @end

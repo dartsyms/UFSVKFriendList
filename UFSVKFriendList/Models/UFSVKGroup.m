@@ -1,14 +1,14 @@
 //
-//  VKGroup.m
+//  UFSVKGroup.m
 //  UFSVKFriendList
 //
 //  Created by noname on 02.06.16.
 //  Copyright © 2016 KOT LLC. All rights reserved.
 //
 
-#import "VKGroup.h"
+#import "UFSVKGroup.h"
 
-@implementation VKGroup
+@implementation UFSVKGroup
 
 - (id)initWithData:(NSDictionary *)dict {
     self = [super init];

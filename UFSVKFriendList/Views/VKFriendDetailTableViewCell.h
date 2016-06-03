@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VKGroup.h"
+#import "UFSVKGroup.h"
 
 @interface VKFriendDetailTableViewCell : UITableViewCell
 
@@ -17,6 +17,6 @@
 
 @property NSURLRequest *request;
 
-- (void)configureCellFor:(VKGroup *)group;
+- (void)configureCellFor:(UFSVKGroup *)group;
 
 @end

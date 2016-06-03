@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VKFriend.h"
+#import "UFSVKFriend.h"
 
 @interface VKFriendTableViewCell : UITableViewCell
 
@@ -18,6 +18,6 @@
 
 @property NSURLRequest *request;
 
-- (void)configureCellFor:(VKFriend *)friend;
+- (void)configureCellFor:(UFSVKFriend *)friend;
 
 @end

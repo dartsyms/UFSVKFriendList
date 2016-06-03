@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VKFriendListTVC : UITableViewController
+@interface VKFriendListTVC : UITableViewController <UISplitViewControllerDelegate>
 
-@property (readwrite) NSInteger userID;
+//@property (readwrite) NSInteger currentUserID;
 
 @end

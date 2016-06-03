@@ -6,12 +6,9 @@
 //  Copyright © 2016 KOT LLC. All rights reserved.
 //
 
-#import "VKFriendDTVC.h"
-#import "Constants.h"
 #import "DataManager.h"
 #import "VKFriendDetailTableViewCell.h"
 #import "VKFriendDTVC.h"
-#import "VKSdk.h"
 #import "UIImageView+AFNetworking.h"
 
 @interface VKFriendDTVC () <UITableViewDelegate, UITableViewDataSource>
@@ -24,16 +21,28 @@
     UIRefreshControl *refresh;
     NSMutableArray *groupsArray;
 }
-
+@synthesize friend;
 @dynamic tableView;
 
 static NSInteger groupsPerRequest = 10;
+NSString* DETAILS_CELL_ID = @"detailsItem";
 
 #pragma mark - Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self->groupsArray = [NSMutableArray array];
     [self setupUI];
+    self.splitViewController.delegate = self;
+//    if ([self.splitViewController respondsToSelector:@selector(displayModeButtonItem)]) {
+//        self.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
+//        self.navigationItem.leftItemsSupplementBackButton = YES;
+//    } else {
+//        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back"
+//                                                                          style:UIBarButtonItemStylePlain
+//                                                                         target:self action:nil];
+//        self.navigationItem.leftBarButtonItem = barButtonItem;
+//        self.navigationItem.leftItemsSupplementBackButton = YES;
+//    }
 }
 
 - (void)setupUI {
@@ -49,22 +58,22 @@ static NSInteger groupsPerRequest = 10;
 
 #pragma mark - Data Load
 - (void)loadDataFromServer {
-    [[DataManager sharedInstance] getGroupsForUserId:[[[VKSdk accessToken] userId] integerValue]
-                                               offset:self->groupsArray.count
-                                                count:groupsPerRequest
-                                              success:^(NSArray *groups) {
-                                                  [self->groupsArray addObjectsFromArray:groups];
-                                                  NSMutableArray *nextPart = [NSMutableArray array];
-                                                  for (int i = (int)[self->groupsArray count] - (int)[groups count]; i < [self->groupsArray count]; i++) {
-                                                      [nextPart addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-                                                  }
-                                                  [self.tableView beginUpdates];
-                                                  [self.tableView insertRowsAtIndexPaths:nextPart withRowAnimation:UITableViewRowAnimationTop];
-                                                  [self.tableView endUpdates];
-                                              }
-                                              failure:^(NSError *error, NSInteger statusCode) {
-                                                  NSLog(@"error = %@, code = %ld", [error localizedDescription], (long)statusCode);
-                                              }];
+    [[DataManager sharedInstance] getGroupsForUserId:[[friend userID] integerValue]
+                                              offset:self->groupsArray.count
+                                               count:groupsPerRequest
+                                             success:^(NSArray *groups) {
+                                                 [self->groupsArray addObjectsFromArray:groups];
+                                                 NSMutableArray *nextPart = [NSMutableArray array];
+                                                 for (int i = (int)[self->groupsArray count] - (int)[groups count]; i < [self->groupsArray count]; i++) {
+                                                     [nextPart addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                                                 }
+                                                 [self.tableView beginUpdates];
+                                                 [self.tableView insertRowsAtIndexPaths:nextPart withRowAnimation:UITableViewRowAnimationTop];
+                                                 [self.tableView endUpdates];
+                                             }
+                                             failure:^(NSError *error, NSInteger statusCode) {
+                                                 NSLog(@"error = %@, code = %ld", [error localizedDescription], (long)statusCode);
+                                             }];
 }
 
 - (void)pullTo:(UIRefreshControl *)_refreshControl {
@@ -92,5 +101,28 @@ static NSInteger groupsPerRequest = 10;
     return cell;
 }
 
+#pragma mark - UISplitViewControllerDelegate methods
+
+- (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc {
+    if (![svc respondsToSelector:@selector(displayModeButtonItem)]) {
+        UINavigationController *navController = (UINavigationController *) svc.viewControllers[svc.viewControllers.count - 1];
+        VKFriendDTVC *dtvc = (VKFriendDTVC *) navController.topViewController;
+        barButtonItem.image = [UIImage imageNamed:@"IC_BackChevron"];
+        dtvc.navigationItem.leftBarButtonItem = barButtonItem;
+    } else {
+        self.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
+        self.navigationItem.leftItemsSupplementBackButton = YES;
+    }
+}
+
+- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
+    if (![svc respondsToSelector:@selector(displayModeButtonItem)]) {
+        UINavigationController *navController = (UINavigationController *) svc.viewControllers[svc.viewControllers.count - 1];
+        VKFriendDTVC *dtvc = (VKFriendDTVC *) navController.topViewController;
+        dtvc.navigationItem.leftBarButtonItem = nil;
+    } else {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
+}
 
 @end

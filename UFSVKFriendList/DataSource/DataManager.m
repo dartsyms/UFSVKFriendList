@@ -8,9 +8,10 @@
 
 #import "DataManager.h"
 #import "AFNetworking.h"
-#import "Constants.h"
-#import "VKFriend.h"
-#import "VKGroup.h"
+#import "UFSVKFriend.h"
+#import "UFSVKGroup.h"
+#import "UFSRequest.h"
+#import "VKSdk.h"
 
 @interface DataManager ()
 
@@ -19,7 +20,13 @@
 @end
 
 
-@implementation DataManager
+@implementation DataManager {
+    NSString *aToken;
+}
+
+NSString* UFSVK_METHOD_URL = @"https://api.vk.com/method/";
+NSString* FRIENDS_GET_KEY = @"friends.get";
+NSString* GROUPS_GET_KEY = @"groups.get";
 
 + (DataManager *)sharedInstance {
     static DataManager *dataManager = nil;
@@ -40,8 +47,10 @@
 - (void)getFriendsForUserId:(NSInteger)userID offset:(NSInteger)offset count:(NSInteger)count
                 success:(void (^)(NSArray *))success
                 failure:(void (^)(NSError *, NSInteger))failure {
+    aToken = [[VKSdk accessToken] accessToken];
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                                             @(userID),    @"user_id",
+                                            aToken,     @"access_token",
                                             @"name",      @"order",
                                             @(count),     @"count",
                                             @(offset),    @"offset",
@@ -60,7 +69,7 @@
                     NSArray *dictArr = [responseObject objectForKey:@"response"];
                     NSMutableArray *dataArr = [NSMutableArray array];
                     for (NSDictionary *dict in dictArr) {
-                        VKFriend *friend = [[VKFriend alloc] initWithData:dict];
+                        UFSVKFriend *friend = [[UFSVKFriend alloc] initWithData:dict];
                         [dataArr addObject:friend];
                     }
                     success(dataArr);
@@ -80,6 +89,7 @@
                     failure:(void (^)(NSError *, NSInteger))failure {
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             @(userID),    @"user_id",
+                            aToken,     @"access_token",
                             @"name",      @"order",
                             @(count),     @"count",
                             @(offset),    @"offset",
@@ -87,7 +97,7 @@
                             @"name_case", @"nom",
                             nil];
     
-    NSString *urlString = [UFSVK_METHOD_URL stringByAppendingString:FRIENDS_GET_KEY];
+    NSString *urlString = [UFSVK_METHOD_URL stringByAppendingString:GROUPS_GET_KEY];
     
     NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:urlString parameters:params error:nil];
     NSURLSessionDataTask *downloadTask = [self.sessionManager dataTaskWithRequest:request
@@ -98,7 +108,7 @@
                     NSArray *dictArr = [responseObject objectForKey:@"response"];
                     NSMutableArray *dataArr = [NSMutableArray array];
                     for (NSDictionary *dict in dictArr) {
-                        VKGroup *group = [[VKGroup alloc] initWithData:dict];
+                        UFSVKGroup *group = [[UFSVKGroup alloc] initWithData:dict];
                         [dataArr addObject:group];
                     }
                     success(dataArr);

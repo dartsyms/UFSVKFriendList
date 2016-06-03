@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "Helpers/Constants.h"
 #import "VKSdk.h"
 
 @interface AppDelegate ()
@@ -17,8 +16,9 @@
 @implementation AppDelegate
 
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [VKSdk initializeWithAppId:UFSVK_APP_IDENTIFIER];
+    [VKSdk initializeWithAppId:@"5490691"];
     return YES;
 }
 

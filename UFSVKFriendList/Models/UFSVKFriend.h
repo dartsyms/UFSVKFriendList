@@ -1,5 +1,5 @@
 //
-//  VKFriend.h
+//  UFSVKFriend.h
 //  UFSVKFriendList
 //
 //  Created by noname on 02.06.16.
@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VKFriend : NSObject
+@interface UFSVKFriend : NSObject
 
 @property (strong, nonatomic) NSString *firstname;
 @property (strong, nonatomic) NSString *surname;
 @property (strong, nonatomic) NSURL *imgUrl;
 @property (strong, nonatomic) NSString *city;
 @property (strong, nonatomic) NSMutableArray *universities;
-@property (strong, nonatomic) NSNumber *userId;
+@property (strong, nonatomic) NSNumber *userID;
 
 - (id)initWithData:(NSDictionary*)dict;
 
