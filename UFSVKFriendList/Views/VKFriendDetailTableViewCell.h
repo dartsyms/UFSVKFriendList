@@ -12,7 +12,7 @@
 @interface VKFriendDetailTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *title;
-@property (weak, nonatomic) IBOutlet UILabel *desc;
+@property (weak, nonatomic) IBOutlet UITextView *desc;
 @property (weak, nonatomic) IBOutlet UIImageView *groupPhoto;
 
 @property NSURLRequest *request;
