@@ -18,7 +18,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [VKSdk initializeWithAppId:@"5490691"];
+    [VKSdk initializeWithAppId:@"5490691" apiVersion:@"5.52"];
     return YES;
 }
 

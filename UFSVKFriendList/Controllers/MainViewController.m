@@ -36,15 +36,18 @@ static NSArray *SCOPE = nil;
     [VKSdk wakeUpSession:SCOPE completeBlock:^(VKAuthorizationState state, NSError *error) {
         switch (state) {
             case VKAuthorizationAuthorized: {
-                    NSLog(@"Token: %@", [VKSdk accessToken]);
-                    [self updateUISetHiddenloginButton:YES andMessage:@"Session exists."];
+                    [self updateUISetHiddenloginButton:YES andMessage:@"Session exists. Wait for load."];
                     [VKSdk wakeUpSession:SCOPE completeBlock:^(VKAuthorizationState state, NSError *error) {
+//                        [VKSdk forceLogout];
                         [self performSegueWithIdentifier:UFSVK_SHOW_LIST_SEGUE_ID sender:self];
                     }]; }
                 break;
             case VKAuthorizationInitialized:
-                [self updateUISetHiddenloginButton:NO andMessage:@"Proceed with login."];
+                [self updateUISetHiddenloginButton:NO andMessage:@"Wait a bit, proceed with login."];
                 [VKSdk authorize:SCOPE];
+                break;
+                case VKAuthorizationError:
+                [self updateUISetHiddenloginButton:NO andMessage:@"Proceed with login."];
                 break;
             default:
                 [self updateUISetHiddenloginButton:NO andMessage:@"Try again later"];
@@ -63,7 +66,6 @@ static NSArray *SCOPE = nil;
 #pragma mark - VKSdkDelegate and VKSdkUIDelegate arbitrary methods
 - (void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result {
     if (result.token) {
-        NSLog(@"Received token %@: ", result.token);
         [self performSegueWithIdentifier:UFSVK_SHOW_LIST_SEGUE_ID sender:self];
     } else if (result.error) {
         self.loginButton.hidden = NO;
@@ -87,7 +89,7 @@ static NSArray *SCOPE = nil;
 }
 
 - (void)vkSdkAccessTokenUpdated:(VKAccessToken *)newToken oldToken:(VKAccessToken *)oldToken {
-    
+    //
 }
 
 #pragma mark - Helpers

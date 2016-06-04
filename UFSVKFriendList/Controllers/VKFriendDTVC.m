@@ -31,18 +31,21 @@ NSString* DETAILS_CELL_ID = @"detailsItem";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self->groupsArray = [NSMutableArray array];
+    [self.tableView setDelegate:self];
+    [self.tableView setDataSource:self];
     [self setupUI];
     self.splitViewController.delegate = self;
-//    if ([self.splitViewController respondsToSelector:@selector(displayModeButtonItem)]) {
-//        self.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
-//        self.navigationItem.leftItemsSupplementBackButton = YES;
-//    } else {
-//        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back"
-//                                                                          style:UIBarButtonItemStylePlain
-//                                                                         target:self action:nil];
-//        self.navigationItem.leftBarButtonItem = barButtonItem;
-//        self.navigationItem.leftItemsSupplementBackButton = YES;
-//    }
+    if ([self.splitViewController respondsToSelector:@selector(displayModeButtonItem)]) {
+        self.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
+        self.navigationItem.leftItemsSupplementBackButton = YES;
+    } else {
+        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                                                          style:UIBarButtonItemStylePlain
+                                                                         target:self action:nil];
+        self.navigationItem.leftBarButtonItem = barButtonItem;
+        self.navigationItem.leftItemsSupplementBackButton = YES;
+    }
+    [self.tableView reloadData];
 }
 
 - (void)setupUI {
@@ -52,7 +55,6 @@ NSString* DETAILS_CELL_ID = @"detailsItem";
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 100;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [refresh beginRefreshing];
     [self pullTo:refresh];
 }
 
@@ -61,23 +63,26 @@ NSString* DETAILS_CELL_ID = @"detailsItem";
     [[DataManager sharedInstance] getGroupsForUserId:[[friend userID] integerValue]
                                               offset:self->groupsArray.count
                                                count:groupsPerRequest
-                                             success:^(NSArray *groups) {
-                                                 [self->groupsArray addObjectsFromArray:groups];
-                                                 NSMutableArray *nextPart = [NSMutableArray array];
-                                                 for (int i = (int)[self->groupsArray count] - (int)[groups count]; i < [self->groupsArray count]; i++) {
-                                                     [nextPart addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-                                                 }
-                                                 [self.tableView beginUpdates];
-                                                 [self.tableView insertRowsAtIndexPaths:nextPart withRowAnimation:UITableViewRowAnimationTop];
-                                                 [self.tableView endUpdates];
-                                             }
-                                             failure:^(NSError *error, NSInteger statusCode) {
-                                                 NSLog(@"error = %@, code = %ld", [error localizedDescription], (long)statusCode);
-                                             }];
+     success:^(NSArray *groups) {
+         for (int i = 0; i < [groups count]; i++) {
+             [self.tableView beginUpdates];
+             NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+             NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+             [self->groupsArray insertObjects:[NSArray arrayWithObjects:groups[i], nil] atIndexes:indexSet];
+             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+             [self.tableView endUpdates];
+         }
+     }
+     failure:^(NSError *error, NSInteger statusCode) {
+         NSLog(@"error = %@, code = %ld", [error localizedDescription], (long)statusCode);
+     }];
 }
 
 - (void)pullTo:(UIRefreshControl *)_refreshControl {
+    [refresh beginRefreshing];
     [self loadDataFromServer];
+    [self.tableView reloadData];
+    [refresh endRefreshing];
 }
 
 
@@ -123,6 +128,10 @@ NSString* DETAILS_CELL_ID = @"detailsItem";
     } else {
         self.navigationItem.leftBarButtonItem = nil;
     }
+}
+
+- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
+    return YES;
 }
 
 @end

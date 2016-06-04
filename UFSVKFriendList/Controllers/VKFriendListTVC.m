@@ -13,7 +13,7 @@
 #import "VKSdk.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface VKFriendListTVC () <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate, UIScrollViewDelegate>
+@interface VKFriendListTVC () <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate, UISearchBarDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -34,16 +34,22 @@
 static NSInteger friendsPerRequest = 30;
 NSString* UFSVK_SHOW_DETAILS_SEGUE_ID = @"showDetails";
 NSString* FRIEND_CELL_ID = @"friendItem";
+BOOL isFiltered = NO;
 
 
 #pragma mark - Lifecycle and UI Helper Functions
 - (void)viewDidLoad {
     [super viewDidLoad];
     self->friendsArray = [NSMutableArray array];
-    [self setupUI];
+    [self.tableView setDelegate:self];
+    [self.tableView setDataSource:self];
+    self.searchBar.delegate = (id)self;
+    
     searchResults = [NSMutableArray arrayWithCapacity:[friendsArray count]];
     self.shouldCollapseDetailViewController = true;
     self.splitViewController.delegate = self;
+    [self setupUI];
+    [self.tableView reloadData];
 }
 
 - (void)setupUI {
@@ -53,7 +59,6 @@ NSString* FRIEND_CELL_ID = @"friendItem";
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 100;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [refresh beginRefreshing];
     [self pullTo:refresh];
 }
 
@@ -74,24 +79,29 @@ NSString* FRIEND_CELL_ID = @"friendItem";
     [[DataManager sharedInstance] getFriendsForUserId:[[[VKSdk accessToken] userId] integerValue]
                                                offset:self->friendsArray.count
                                                 count:friendsPerRequest
-                                              success:^(NSArray *friends) {
-                                                  [self->friendsArray addObjectsFromArray:friends];
-                                                  NSMutableArray *nextPart = [NSMutableArray array];
-                                                  for (int i = (int)[self->friendsArray count] - (int)[friends count]; i < [self->friendsArray count]; i++) {
-                                                      [nextPart addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-                                                  }
-                                                  [self.tableView beginUpdates];
-                                                  [self.tableView insertRowsAtIndexPaths:nextPart withRowAnimation:UITableViewRowAnimationTop];
-                                                  [self.tableView endUpdates];
-                                              }
-                                              failure:^(NSError *error, NSInteger statusCode) {
-                                                  NSLog(@"error = %@, code = %ld", [error localizedDescription], (long)statusCode);
-                                              }];
+      success:^(NSArray *friends) {
+          // insert rows at the top one by one
+          for (int i = 0; i < [friends count]; i++) {
+              [self.tableView beginUpdates];
+              NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+              NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+              [self->friendsArray insertObjects:[NSArray arrayWithObjects:friends[i], nil] atIndexes:indexSet];
+               [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+              [self.tableView endUpdates];
+          }
+          
+      }
+      failure:^(NSError *error, NSInteger statusCode) {
+          NSLog(@"error = %@, code = %ld", [error localizedDescription], (long)statusCode);
+      }];
 }
 
 - (void)pullTo:(UIRefreshControl *)_refreshControl {
     self.searchBar.text = @"";
+    [refresh beginRefreshing];
     [self loadDataFromServer];
+    [self.tableView reloadData];
+    [refresh endRefreshing];
 }
 
 
@@ -110,7 +120,7 @@ NSString* FRIEND_CELL_ID = @"friendItem";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    VKFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FRIEND_CELL_ID forIndexPath:indexPath];
+    VKFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FRIEND_CELL_ID];
     if (!cell) {
         cell = [[VKFriendTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FRIEND_CELL_ID];
     }
@@ -126,14 +136,38 @@ NSString* FRIEND_CELL_ID = @"friendItem";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //
+    [self performSegueWithIdentifier:UFSVK_SHOW_DETAILS_SEGUE_ID sender:self];
 }
 
 #pragma mark - SearchDisplayDelegate methods
+-(void)searchBar:(UISearchBar*)searchBar textDidChange:(NSString*)text {
+    if(text.length == 0) {
+        isFiltered = NO;
+    } else {
+        isFiltered = true;
+        searchResults = [[NSMutableArray alloc] init];
+        for (UFSVKFriend* friend in friendsArray) {
+            NSString *universitiesString = @"";
+            NSRange universityNameRange = [friend.universities rangeOfString:text options:NSCaseInsensitiveSearch];
+            NSRange firstNameRange = [friend.surname rangeOfString:text options:NSCaseInsensitiveSearch];
+            NSRange lastNameRange = [friend.firstname rangeOfString:text options:NSCaseInsensitiveSearch];
+            NSRange cityNameRange = [friend.city rangeOfString:text options:NSCaseInsensitiveSearch];
+            
+            if(firstNameRange.location != NSNotFound||lastNameRange.location != NSNotFound||cityNameRange.location != NSNotFound||universityNameRange.location != NSNotFound) {
+                [searchResults addObject:friend];
+            }
+        }
+    }
+    
+    [self.tableView reloadData];
+}
+
 - (void)filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope {
     [searchResults removeAllObjects];
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@", searchText];
-    searchResults = [NSMutableArray arrayWithArray:[friendsArray filteredArrayUsingPredicate:resultPredicate]];
+    if (!searchText) {
+        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@", searchText];
+        searchResults = [NSMutableArray arrayWithArray:[friendsArray filteredArrayUsingPredicate:resultPredicate]];
+    }
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(nullable NSString *)searchString {

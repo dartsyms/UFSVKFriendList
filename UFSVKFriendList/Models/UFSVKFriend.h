@@ -14,7 +14,7 @@
 @property (strong, nonatomic) NSString *surname;
 @property (strong, nonatomic) NSURL *imgUrl;
 @property (strong, nonatomic) NSString *city;
-@property (strong, nonatomic) NSMutableArray *universities;
+@property (strong, nonatomic) NSString *universities;
 @property (strong, nonatomic) NSNumber *userID;
 
 - (id)initWithData:(NSDictionary*)dict;

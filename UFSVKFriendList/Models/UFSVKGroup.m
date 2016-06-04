@@ -15,7 +15,7 @@
     if (self) {
         self.grtitle = [dict objectForKey:@"name"];
         self.grdesc = [dict objectForKey:@"description"];
-        NSString *urlString = [dict objectForKey:@"photo_100"];
+        NSString *urlString = [dict objectForKey:@"photo"];
         if (urlString) {
             self.grImgUrl = [NSURL URLWithString:urlString];
         }
