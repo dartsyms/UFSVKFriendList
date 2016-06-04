@@ -60,7 +60,7 @@
             </objects>
             <point key="canvasLocation" x="-814" y="481"/>
         </scene>
-        <!--Friend ListTVC-->
+        <!--Friends-->
         <scene sceneID="pC1-Vs-rFH">
             <objects>
                 <tableViewController id="cVn-uy-qxF" customClass="VKFriendListTVC" sceneMemberID="viewController">
@@ -68,17 +68,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="02C-hD-iAC">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="2Rg-Xr-yQq">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="cVn-uy-qxF" id="OQR-uS-npr"/>
-                            </connections>
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendItem" rowHeight="158" id="8df-Nj-ahP" customClass="VKFriendTableViewCell">
-                                <rect key="frame" x="0.0" y="72" width="600" height="158"/>
+                                <rect key="frame" x="0.0" y="136" width="600" height="158"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8df-Nj-ahP" id="dXr-ts-env">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="157"/>
@@ -146,24 +143,20 @@
                             <outlet property="delegate" destination="cVn-uy-qxF" id="L14-DJ-SjB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Q38-bp-YkO"/>
+                    <navigationItem key="navigationItem" title="Friends" id="Q38-bp-YkO">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="Gc8-Vv-kEJ">
+                            <connections>
+                                <action selector="tapToForceLogout:" destination="cVn-uy-qxF" id="CIM-KC-CyT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="searchBar" destination="02C-hD-iAC" id="axq-yv-JWw"/>
-                        <outlet property="searchDisplayController" destination="byh-Hh-CJy" id="Fuk-LZ-EVJ"/>
+                        <outlet property="searchBar" destination="2Rg-Xr-yQq" id="1wg-fu-XtI"/>
                         <outlet property="tableView" destination="AIV-N1-3LN" id="hay-iH-CAQ"/>
                         <segue destination="KPo-Sb-HRZ" kind="showDetail" identifier="showDetails" id="bdL-ff-dFh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3OI-ps-6Np" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="byh-Hh-CJy">
-                    <connections>
-                        <outlet property="delegate" destination="cVn-uy-qxF" id="rzo-q0-cCm"/>
-                        <outlet property="searchBar" destination="02C-hD-iAC" id="X4L-2S-sHY"/>
-                        <outlet property="searchContentsController" destination="cVn-uy-qxF" id="Chj-sR-fWQ"/>
-                        <outlet property="searchResultsDataSource" destination="cVn-uy-qxF" id="gsb-yV-Ssh"/>
-                        <outlet property="searchResultsDelegate" destination="cVn-uy-qxF" id="oK7-0W-lmf"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1451" y="54"/>
         </scene>
@@ -180,7 +173,7 @@
             </objects>
             <point key="canvasLocation" x="-82" y="481"/>
         </scene>
-        <!--FriendDTVC-->
+        <!--Groups-->
         <scene sceneID="8hi-7R-YTT">
             <objects>
                 <tableViewController id="Abp-vt-M0G" customClass="VKFriendDTVC" sceneMemberID="viewController">
@@ -241,7 +234,7 @@
                             <outlet property="delegate" destination="Abp-vt-M0G" id="rYg-aL-N3f"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="i3i-ic-VtG"/>
+                    <navigationItem key="navigationItem" title="Groups" id="i3i-ic-VtG"/>
                     <connections>
                         <outlet property="tableView" destination="ZdU-l2-FqX" id="Sh4-KR-qCE"/>
                     </connections>
@@ -253,9 +246,8 @@
         <!--Navigation Controller-->
         <scene sceneID="vG5-RL-G1W">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="YEI-oG-3Vb" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YEI-oG-3Vb" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WzI-g6-ogW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -289,6 +281,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="o2O-BL-k5S"/>
+        <segue reference="bdL-ff-dFh"/>
     </inferredMetricsTieBreakers>
 </document>

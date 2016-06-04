@@ -26,7 +26,6 @@ static NSArray *SCOPE = nil;
 
 
 #pragma mark - Lifecycle
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     SCOPE = @[VK_PER_FRIENDS, VK_PER_GROUPS];
@@ -38,7 +37,6 @@ static NSArray *SCOPE = nil;
             case VKAuthorizationAuthorized: {
                     [self updateUISetHiddenloginButton:YES andMessage:@"Session exists. Wait for load."];
                     [VKSdk wakeUpSession:SCOPE completeBlock:^(VKAuthorizationState state, NSError *error) {
-//                        [VKSdk forceLogout];
                         [self performSegueWithIdentifier:UFSVK_SHOW_LIST_SEGUE_ID sender:self];
                     }]; }
                 break;
@@ -86,10 +84,6 @@ static NSArray *SCOPE = nil;
 - (void)vkSdkNeedCaptchaEnter:(VKError *)captchaError {
     VKCaptchaViewController *vc = [VKCaptchaViewController captchaControllerWithError:captchaError];
     [vc presentIn:self];
-}
-
-- (void)vkSdkAccessTokenUpdated:(VKAccessToken *)newToken oldToken:(VKAccessToken *)oldToken {
-    //
 }
 
 #pragma mark - Helpers

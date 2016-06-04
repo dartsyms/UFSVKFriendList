@@ -15,22 +15,17 @@
 
 @implementation AppDelegate
 
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [VKSdk initializeWithAppId:@"5490691" apiVersion:@"5.52"];
     return YES;
 }
 
 #pragma mark - SDK Initialization
-
-// referring their own init workflow: for iOS 9
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
     [VKSdk processOpenURL:url fromApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
     return YES;
 }
 
-// for iOS 8 -
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     [VKSdk processOpenURL:url fromApplication:sourceApplication];
     return YES;

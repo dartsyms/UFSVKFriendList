@@ -10,7 +10,6 @@
 #import "AFNetworking.h"
 #import "UFSVKFriend.h"
 #import "UFSVKGroup.h"
-#import "UFSRequest.h"
 #import "VKSdk.h"
 
 @interface DataManager ()
@@ -95,7 +94,6 @@ NSString* CITY_GET_NAME_KEY = @"database.getCitiesById";
     NSURLSessionDataTask *downloadTask = [self.sessionManager dataTaskWithRequest:request
         completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
             if (!error) {
-                NSLog(@"Reply JSON: %@", responseObject);
                 if ([responseObject isKindOfClass:[NSDictionary class]]) {
                     NSArray *items = [responseObject objectForKey:@"response"];
                     NSDictionary *dictArr = [items firstObject];

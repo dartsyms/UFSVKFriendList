@@ -11,7 +11,7 @@
 #import "VKFriendDTVC.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface VKFriendDTVC () <UITableViewDelegate, UITableViewDataSource>
+@interface VKFriendDTVC () <UITableViewDelegate, UITableViewDataSource, UISplitViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -107,7 +107,6 @@ NSString* DETAILS_CELL_ID = @"detailsItem";
 }
 
 #pragma mark - UISplitViewControllerDelegate methods
-
 - (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc {
     if (![svc respondsToSelector:@selector(displayModeButtonItem)]) {
         UINavigationController *navController = (UINavigationController *) svc.viewControllers[svc.viewControllers.count - 1];
@@ -128,10 +127,6 @@ NSString* DETAILS_CELL_ID = @"detailsItem";
     } else {
         self.navigationItem.leftBarButtonItem = nil;
     }
-}
-
-- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
-    return YES;
 }
 
 @end

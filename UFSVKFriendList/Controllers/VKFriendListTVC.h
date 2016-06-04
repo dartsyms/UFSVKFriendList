@@ -10,6 +10,4 @@
 
 @interface VKFriendListTVC : UITableViewController <UISplitViewControllerDelegate>
 
-//@property (readwrite) NSInteger currentUserID;
-
 @end

@@ -13,12 +13,11 @@
 #import "VKSdk.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface VKFriendListTVC () <UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate, UISearchBarDelegate, UIScrollViewDelegate>
+@interface VKFriendListTVC () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
-
 @property (nonatomic) BOOL shouldCollapseDetailViewController;
 
 @end
@@ -44,9 +43,8 @@ BOOL isFiltered = NO;
     [self.tableView setDelegate:self];
     [self.tableView setDataSource:self];
     self.searchBar.delegate = (id)self;
-    
     searchResults = [NSMutableArray arrayWithCapacity:[friendsArray count]];
-    self.shouldCollapseDetailViewController = true;
+    self.shouldCollapseDetailViewController = YES;
     self.splitViewController.delegate = self;
     [self setupUI];
     [self.tableView reloadData];
@@ -104,6 +102,10 @@ BOOL isFiltered = NO;
     [refresh endRefreshing];
 }
 
+// this action is only for testing, remove it after
+- (IBAction)tapToForceLogout:(UIBarButtonItem *)sender {
+    [VKSdk forceLogout];
+}
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -111,7 +113,7 @@ BOOL isFiltered = NO;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.tableView == self.searchDisplayController.searchResultsTableView) {
+    if (isFiltered) {
         return [searchResults count];
     } else {
         return friendsArray.count;
@@ -124,22 +126,21 @@ BOOL isFiltered = NO;
     if (!cell) {
         cell = [[VKFriendTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FRIEND_CELL_ID];
     }
-    if (self.tableView == self.searchDisplayController.searchResultsTableView) {
+    if (isFiltered) {
         [cell configureCellFor:searchResults[indexPath.row]];
     } else {
         [cell configureCellFor:friendsArray[indexPath.row]];
     }
-    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.shouldCollapseDetailViewController = NO;
     [self performSegueWithIdentifier:UFSVK_SHOW_DETAILS_SEGUE_ID sender:self];
 }
 
-#pragma mark - SearchDisplayDelegate methods
+#pragma mark - SearchBarDelegate methods
 -(void)searchBar:(UISearchBar*)searchBar textDidChange:(NSString*)text {
     if(text.length == 0) {
         isFiltered = NO;
@@ -147,13 +148,12 @@ BOOL isFiltered = NO;
         isFiltered = true;
         searchResults = [[NSMutableArray alloc] init];
         for (UFSVKFriend* friend in friendsArray) {
-            NSString *universitiesString = @"";
-            NSRange universityNameRange = [friend.universities rangeOfString:text options:NSCaseInsensitiveSearch];
+            NSRange universityRange = [friend.universities rangeOfString:text options:NSCaseInsensitiveSearch];
             NSRange firstNameRange = [friend.surname rangeOfString:text options:NSCaseInsensitiveSearch];
             NSRange lastNameRange = [friend.firstname rangeOfString:text options:NSCaseInsensitiveSearch];
-            NSRange cityNameRange = [friend.city rangeOfString:text options:NSCaseInsensitiveSearch];
+            NSRange cityRange = [friend.city rangeOfString:text options:NSCaseInsensitiveSearch];
             
-            if(firstNameRange.location != NSNotFound||lastNameRange.location != NSNotFound||cityNameRange.location != NSNotFound||universityNameRange.location != NSNotFound) {
+            if(firstNameRange.location != NSNotFound||lastNameRange.location != NSNotFound||cityRange.location != NSNotFound||universityRange.location != NSNotFound) {
                 [searchResults addObject:friend];
             }
         }
@@ -162,18 +162,12 @@ BOOL isFiltered = NO;
     [self.tableView reloadData];
 }
 
-- (void)filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope {
-    [searchResults removeAllObjects];
-    if (!searchText) {
-        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@", searchText];
-        searchResults = [NSMutableArray arrayWithArray:[friendsArray filteredArrayUsingPredicate:resultPredicate]];
-    }
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.searchBar resignFirstResponder];
 }
 
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(nullable NSString *)searchString {
-    [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
-                                                         objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
-    return YES;
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self.searchBar resignFirstResponder];
 }
 
 #pragma mark - Keyboard Notification Observers
@@ -198,21 +192,30 @@ BOOL isFiltered = NO;
             // ios 8
             dtvc = (VKFriendDTVC *) [segue destinationViewController];
         }
-        
-        if ([self.searchDisplayController isActive]) {
-            indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+        indexPath = [self.tableView indexPathForSelectedRow];
+        if (isFiltered) {
             dtvc.friend = [searchResults objectAtIndex:indexPath.row];
         } else {
-            indexPath = [self.tableView indexPathForSelectedRow];
             dtvc.friend = [friendsArray objectAtIndex:indexPath.row];
         }
-        
     }
 }
 
 #pragma mark - UIScrollViewControllerDelegate methods
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self.searchBar resignFirstResponder];
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGRect tableBounds = self.tableView.bounds;
+    CGRect searchBarFrame = self.searchBar.frame;
+    self.searchBar.frame = CGRectMake(tableBounds.origin.x, tableBounds.origin.y,
+                                      searchBarFrame.size.width, searchBarFrame.size.height);
+}
+
+#pragma mark - UISplitViewController delegate methods
+- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
+    return self.shouldCollapseDetailViewController;
 }
 
 
