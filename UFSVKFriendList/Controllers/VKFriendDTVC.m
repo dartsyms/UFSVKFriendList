@@ -55,6 +55,11 @@ NSString* DETAILS_CELL_ID = @"detailsItem";
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 100;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    if (friend.firstname != nil) {
+        self.navigationItem.title = [NSString stringWithFormat:@"%@ %@", friend.firstname, friend.surname];
+    } else {
+        self.navigationItem.title = @"Current User";
+    }
     [self pullTo:refresh];
 }
 
