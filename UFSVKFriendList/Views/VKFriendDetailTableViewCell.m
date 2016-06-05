@@ -23,12 +23,6 @@
 
 - (void)configureCellFor:(UFSVKGroup *)group {
     self.title.text = group.grtitle;
-    // Commented out because breakes the constraints
-//    NSString *descHtml = group.grdesc;
-//    NSAttributedString *attr = [[NSAttributedString alloc] initWithData:[descHtml dataUsingEncoding:NSUTF8StringEncoding]
-//                                                                options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-//                                                                          NSCharacterEncodingDocumentAttribute:@(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
-//    self.desc.text = [attr string];
 
     self.desc.text = group.grdesc;
     self.request = [NSURLRequest requestWithURL:group.grImgUrl];
