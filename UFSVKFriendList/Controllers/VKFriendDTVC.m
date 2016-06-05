@@ -107,6 +107,9 @@ NSString* DETAILS_CELL_ID = @"detailsItem";
 }
 
 #pragma mark - UISplitViewControllerDelegate methods
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc {
     if (![svc respondsToSelector:@selector(displayModeButtonItem)]) {
         UINavigationController *navController = (UINavigationController *) svc.viewControllers[svc.viewControllers.count - 1];
@@ -118,6 +121,7 @@ NSString* DETAILS_CELL_ID = @"detailsItem";
         self.navigationItem.leftItemsSupplementBackButton = YES;
     }
 }
+#pragma clang diagnostic pop
 
 - (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
     if (![svc respondsToSelector:@selector(displayModeButtonItem)]) {

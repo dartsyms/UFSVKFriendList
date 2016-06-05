@@ -60,13 +60,13 @@ BOOL isFiltered = NO;
     [self pullTo:refresh];
 }
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
 }
 
--(void)viewDidDisappear:(BOOL)animated{
+- (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
@@ -77,21 +77,21 @@ BOOL isFiltered = NO;
     [[DataManager sharedInstance] getFriendsForUserId:[[[VKSdk accessToken] userId] integerValue]
                                                offset:self->friendsArray.count
                                                 count:friendsPerRequest
-      success:^(NSArray *friends) {
-          // insert rows at the top one by one
-          for (int i = 0; i < [friends count]; i++) {
-              [self.tableView beginUpdates];
-              NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
-              NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-              [self->friendsArray insertObjects:[NSArray arrayWithObjects:friends[i], nil] atIndexes:indexSet];
-               [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-              [self.tableView endUpdates];
-          }
-          
-      }
-      failure:^(NSError *error, NSInteger statusCode) {
-          NSLog(@"error = %@, code = %ld", [error localizedDescription], (long)statusCode);
-      }];
+                                              success:^(NSArray *friends) {
+                                                  // insert rows at the top one by one
+                                                  for (int i = 0; i < [friends count]; i++) {
+                                                      [self.tableView beginUpdates];
+                                                      NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+                                                      NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                                                      [self->friendsArray insertObjects:[NSArray arrayWithObjects:friends[i], nil] atIndexes:indexSet];
+                                                      [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+                                                      [self.tableView endUpdates];
+                                                  }
+                                                  
+                                              }
+                                              failure:^(NSError *error, NSInteger statusCode) {
+                                                  NSLog(@"error = %@, code = %ld", [error localizedDescription], (long)statusCode);
+                                              }];
 }
 
 - (void)pullTo:(UIRefreshControl *)_refreshControl {
@@ -197,6 +197,15 @@ BOOL isFiltered = NO;
             dtvc.friend = [searchResults objectAtIndex:indexPath.row];
         } else {
             dtvc.friend = [friendsArray objectAtIndex:indexPath.row];
+        }
+        
+        if (self.splitViewController.traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad
+            && self.splitViewController.displayMode == UISplitViewControllerDisplayModePrimaryOverlay) {
+            [UIView animateWithDuration:0.3 animations:^{
+                [self.splitViewController setPreferredDisplayMode:UISplitViewControllerDisplayModePrimaryHidden];
+            } completion:^(BOOL finished) {
+                [self.splitViewController setPreferredDisplayMode:UISplitViewControllerDisplayModeAutomatic];
+            }];
         }
     }
 }
