@@ -69,6 +69,7 @@ NSString* DETAILS_CELL_ID = @"detailsItem";
                                               offset:self->groupsArray.count
                                                count:groupsPerRequest
      success:^(NSArray *groups) {
+         [refresh beginRefreshing];
          for (int i = 0; i < [groups count]; i++) {
              [self.tableView beginUpdates];
              NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
@@ -77,6 +78,8 @@ NSString* DETAILS_CELL_ID = @"detailsItem";
              [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
              [self.tableView endUpdates];
          }
+         [self.tableView reloadData];
+         [refresh endRefreshing];
      }
      failure:^(NSError *error, NSInteger statusCode) {
          NSLog(@"error = %@, code = %ld", [error localizedDescription], (long)statusCode);
@@ -84,10 +87,8 @@ NSString* DETAILS_CELL_ID = @"detailsItem";
 }
 
 - (void)pullTo:(UIRefreshControl *)_refreshControl {
-    [refresh beginRefreshing];
     [self loadDataFromServer];
-    [self.tableView reloadData];
-    [refresh endRefreshing];
+    
 }
 
 

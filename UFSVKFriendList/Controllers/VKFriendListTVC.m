@@ -78,6 +78,7 @@ BOOL isFiltered = NO;
                                                offset:self->friendsArray.count
                                                 count:friendsPerRequest
                                               success:^(NSArray *friends) {
+                                                  [refresh beginRefreshing];
                                                   // insert rows at the top one by one
                                                   for (int i = 0; i < [friends count]; i++) {
                                                       [self.tableView beginUpdates];
@@ -87,7 +88,8 @@ BOOL isFiltered = NO;
                                                       [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
                                                       [self.tableView endUpdates];
                                                   }
-                                                  
+                                                  [self.tableView reloadData];
+                                                  [refresh endRefreshing];
                                               }
                                               failure:^(NSError *error, NSInteger statusCode) {
                                                   NSLog(@"error = %@, code = %ld", [error localizedDescription], (long)statusCode);
@@ -96,10 +98,7 @@ BOOL isFiltered = NO;
 
 - (void)pullTo:(UIRefreshControl *)_refreshControl {
     self.searchBar.text = @"";
-    [refresh beginRefreshing];
     [self loadDataFromServer];
-    [self.tableView reloadData];
-    [refresh endRefreshing];
 }
 
 // this action is only for testing, remove it after
