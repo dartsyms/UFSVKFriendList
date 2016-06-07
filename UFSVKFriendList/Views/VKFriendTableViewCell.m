@@ -22,6 +22,11 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self.contentView layoutIfNeeded];
+}
+
 -(void)configureCellFor:(UFSVKFriend *)friend {
     self.friendName.text = [NSString stringWithFormat:@"%@ %@", friend.firstname, friend.surname];
     self.cityFrom.text = friend.city;

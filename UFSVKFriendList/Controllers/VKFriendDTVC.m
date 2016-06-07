@@ -53,7 +53,7 @@ NSString* DETAILS_CELL_ID = @"detailsItem";
     [refresh addTarget:self action:@selector(pullTo:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refresh];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 100;
+    self.tableView.estimatedRowHeight = 140;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     if (friend.firstname != nil) {
         self.navigationItem.title = [NSString stringWithFormat:@"%@ %@", friend.firstname, friend.surname];
@@ -110,6 +110,31 @@ NSString* DETAILS_CELL_ID = @"detailsItem";
     
     return cell;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static VKFriendDetailTableViewCell *cell = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        cell = [self.tableView dequeueReusableCellWithIdentifier:DETAILS_CELL_ID];
+    });
+    
+    [cell configureCellFor:groupsArray[indexPath.row]];
+    cell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.tableView.bounds), CGRectGetHeight(cell.bounds));
+    return [self calculateHeightForConfiguredSizingCell:cell];
+}
+
+- (CGFloat)calculateHeightForConfiguredSizingCell:(UITableViewCell *)sizingCell {
+    [sizingCell setNeedsLayout];
+    [sizingCell layoutIfNeeded];
+    CGFloat height = [sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    height += 1.0f;
+    return height;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
+}
+
 
 #pragma mark - UISplitViewControllerDelegate methods
 

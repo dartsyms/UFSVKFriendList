@@ -189,42 +189,41 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="142"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Title" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="uKv-Y0-u9h">
-                                            <rect key="frame" x="158" y="12" width="434" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="751" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKv-Y0-u9h">
+                                            <rect key="frame" x="126" y="18" width="466" height="18"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2iC-b0-sVc">
-                                            <rect key="frame" x="158" y="38" width="434" height="96"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MB4-el-fLd">
-                                            <rect key="frame" x="18" y="11" width="120" height="120"/>
+                                            <rect key="frame" x="18" y="18" width="100" height="100"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="120" id="Bxj-Fp-9Bs"/>
-                                                <constraint firstAttribute="width" constant="120" id="gyH-Ol-gdt"/>
+                                                <constraint firstAttribute="width" constant="100" id="60Y-PX-oky"/>
+                                                <constraint firstAttribute="height" constant="100" id="akt-6p-upq"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Description" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gne-Pw-uyQ">
+                                            <rect key="frame" x="126" y="44" width="466" height="80"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="uKv-Y0-u9h" firstAttribute="trailing" secondItem="qTw-zW-aCM" secondAttribute="trailingMargin" id="4yx-hq-dVh"/>
-                                        <constraint firstItem="2iC-b0-sVc" firstAttribute="leading" secondItem="MB4-el-fLd" secondAttribute="trailing" constant="20" id="93c-M3-aUB"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="MB4-el-fLd" secondAttribute="bottom" constant="3" id="C3J-Jm-W6s"/>
-                                        <constraint firstItem="uKv-Y0-u9h" firstAttribute="top" secondItem="qTw-zW-aCM" secondAttribute="topMargin" constant="4" id="IwG-Ks-BlZ"/>
-                                        <constraint firstItem="MB4-el-fLd" firstAttribute="leading" secondItem="qTw-zW-aCM" secondAttribute="leadingMargin" constant="10" id="JpZ-rG-huH"/>
-                                        <constraint firstItem="2iC-b0-sVc" firstAttribute="top" secondItem="uKv-Y0-u9h" secondAttribute="bottom" constant="8" symbolic="YES" id="Swr-Eu-CL8"/>
-                                        <constraint firstItem="2iC-b0-sVc" firstAttribute="trailing" secondItem="qTw-zW-aCM" secondAttribute="trailingMargin" id="gAh-Kx-TYE"/>
-                                        <constraint firstItem="2iC-b0-sVc" firstAttribute="bottom" secondItem="qTw-zW-aCM" secondAttribute="bottomMargin" id="sRY-I9-SvR"/>
-                                        <constraint firstItem="MB4-el-fLd" firstAttribute="top" secondItem="qTw-zW-aCM" secondAttribute="topMargin" constant="3" id="tcC-Kd-WpP"/>
-                                        <constraint firstItem="uKv-Y0-u9h" firstAttribute="leading" secondItem="MB4-el-fLd" secondAttribute="trailing" constant="20" id="zVc-BA-ytv"/>
+                                        <constraint firstItem="MB4-el-fLd" firstAttribute="leading" secondItem="qTw-zW-aCM" secondAttribute="leadingMargin" constant="10" id="Q6U-fq-DcI"/>
+                                        <constraint firstItem="MB4-el-fLd" firstAttribute="top" secondItem="qTw-zW-aCM" secondAttribute="topMargin" constant="10" id="QfN-dH-Ox9"/>
+                                        <constraint firstItem="Gne-Pw-uyQ" firstAttribute="top" secondItem="uKv-Y0-u9h" secondAttribute="bottom" constant="8" symbolic="YES" id="Srt-cE-yKt"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="uKv-Y0-u9h" secondAttribute="trailing" id="XqL-GV-a9Q"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Gne-Pw-uyQ" secondAttribute="bottom" constant="10" id="c5d-mD-cNS"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Gne-Pw-uyQ" secondAttribute="trailing" id="dwQ-sj-eEM"/>
+                                        <constraint firstItem="uKv-Y0-u9h" firstAttribute="leading" secondItem="MB4-el-fLd" secondAttribute="trailing" constant="8" symbolic="YES" id="hyB-Hk-kaT"/>
+                                        <constraint firstItem="Gne-Pw-uyQ" firstAttribute="leading" secondItem="MB4-el-fLd" secondAttribute="trailing" constant="8" symbolic="YES" id="kg7-a3-9RE"/>
+                                        <constraint firstItem="uKv-Y0-u9h" firstAttribute="top" secondItem="qTw-zW-aCM" secondAttribute="topMargin" constant="10" id="lL2-Sr-mlL"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="MB4-el-fLd" secondAttribute="bottom" priority="999" constant="10" id="ogW-rV-sRx"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="desc" destination="2iC-b0-sVc" id="OCU-7w-p5H"/>
+                                    <outlet property="desc" destination="Gne-Pw-uyQ" id="vtP-Rv-FYw"/>
                                     <outlet property="groupPhoto" destination="MB4-el-fLd" id="CYs-1X-lPU"/>
                                     <outlet property="title" destination="uKv-Y0-u9h" id="t9o-xC-nSZ"/>
                                 </connections>

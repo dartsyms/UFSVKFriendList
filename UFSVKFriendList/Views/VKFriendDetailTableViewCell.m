@@ -21,6 +21,12 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self.contentView layoutIfNeeded];
+    self.desc.preferredMaxLayoutWidth = CGRectGetWidth(self.desc.frame);
+}
+
 - (void)configureCellFor:(UFSVKGroup *)group {
     self.title.text = group.grtitle;
 
@@ -37,5 +43,7 @@
            //
        }];
 }
+
+
 
 @end
