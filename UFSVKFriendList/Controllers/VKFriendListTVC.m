@@ -77,23 +77,23 @@ BOOL isFiltered = NO;
     [[DataManager sharedInstance] getFriendsForUserId:[[[VKSdk accessToken] userId] integerValue]
                                                offset:self->friendsArray.count
                                                 count:friendsPerRequest
-                                              success:^(NSArray *friends) {
-                                                  [refresh beginRefreshing];
-                                                  // insert rows at the top one by one
-                                                  for (int i = 0; i < [friends count]; i++) {
-                                                      [self.tableView beginUpdates];
-                                                      NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
-                                                      NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-                                                      [self->friendsArray insertObjects:[NSArray arrayWithObjects:friends[i], nil] atIndexes:indexSet];
-                                                      [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-                                                      [self.tableView endUpdates];
-                                                  }
-                                                  [self.tableView reloadData];
-                                                  [refresh endRefreshing];
-                                              }
-                                              failure:^(NSError *error, NSInteger statusCode) {
-                                                  NSLog(@"error = %@, code = %ld", [error localizedDescription], (long)statusCode);
-                                              }];
+          success:^(NSArray *friends) {
+              [refresh beginRefreshing];
+              // insert rows at the top one by one
+              for (int i = 0; i < [friends count]; i++) {
+                  [self.tableView beginUpdates];
+                  NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+                  NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                  [self->friendsArray insertObjects:[NSArray arrayWithObjects:friends[i], nil] atIndexes:indexSet];
+                  [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+                  [self.tableView endUpdates];
+              }
+              [self.tableView reloadData];
+              [refresh endRefreshing];
+          }
+          failure:^(NSError *error, NSInteger statusCode) {
+              NSLog(@"error = %@, code = %ld", [error localizedDescription], (long)statusCode);
+          }];
 }
 
 - (void)pullTo:(UIRefreshControl *)_refreshControl {
@@ -152,7 +152,9 @@ BOOL isFiltered = NO;
             NSRange lastNameRange = [friend.firstname rangeOfString:text options:NSCaseInsensitiveSearch];
             NSRange cityRange = [friend.city rangeOfString:text options:NSCaseInsensitiveSearch];
             
-            if(firstNameRange.location != NSNotFound||lastNameRange.location != NSNotFound||cityRange.location != NSNotFound||universityRange.location != NSNotFound) {
+            if(firstNameRange.location != NSNotFound||lastNameRange.location != NSNotFound
+                                                    ||cityRange.location != NSNotFound
+                                                    ||universityRange.location != NSNotFound) {
                 [searchResults addObject:friend];
             }
         }

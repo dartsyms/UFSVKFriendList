@@ -14,7 +14,11 @@
 - (id)initWithData:(NSDictionary *)dict {
     self = [super init];
     if (self) {
-        self.grtitle = [dict objectForKey:@"name"];
+        NSString *titleHtml = [dict objectForKey:@"name"];
+        NSAttributedString *titleAttr = [[NSAttributedString alloc] initWithData:[titleHtml dataUsingEncoding:NSUTF8StringEncoding]
+                                                                        options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                                                                  NSCharacterEncodingDocumentAttribute:@(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
+        self.grtitle =[titleAttr string];
         NSString *descHtml = [dict objectForKey:@"description"];
         NSAttributedString *attr = [[NSAttributedString alloc] initWithData:[descHtml dataUsingEncoding:NSUTF8StringEncoding]
                                                                     options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,

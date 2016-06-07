@@ -137,7 +137,6 @@ NSString* CITY_GET_NAME_KEY = @"database.getCitiesById";
                             UFSVKGroup *group = [[UFSVKGroup alloc] initWithData:dict];
                             [dataArr addObject:group];
                         }
-                        
                     }
                     success(dataArr);
                 }

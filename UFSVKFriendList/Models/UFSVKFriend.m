@@ -21,7 +21,7 @@
         if (urlString) {
             self.imgUrl = [NSURL URLWithString:urlString];
         }
-
+        
         NSString *cityID = [dict objectForKey:@"city"];
         [[DataManager sharedInstance] getCityById:cityID success:^(NSString *city) {
             if (city) {
@@ -32,7 +32,6 @@
         } failure:^(NSError *error, NSInteger statusCode) {
             //
         }];
-        
         
         // Get university or school if any, otherwise empty.
         NSArray *uniDict = [dict objectForKey:@"universities"];
@@ -56,5 +55,6 @@
     }
     return self;
 }
+
 
 @end
